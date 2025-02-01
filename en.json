@@ -1,0 +1,12 @@
+{
+    "greet": "Hello %1, What a beautiful day. Server current date and time is ",
+    "name": "Please enter your name",
+    "writeMessage": "Please enter your message",
+    "nameLabel": "Name",
+    "nameAction": "Get Date",
+    "writeLabel": "Write",
+    "writeAction": "Write to File",
+    "readMessage": "Please enter the file name",
+    "readAction": "Read File",
+    "readLabel": "Read"
+}
