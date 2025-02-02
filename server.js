@@ -39,12 +39,6 @@ class ServerApp {
       case "getDate":
         this.handleGetDate(req, res, parsedURL, date);
         break;
-      case "writeFile":
-        this.handleWriteFile(req, res, parsedURL);
-        break;
-      case "readFile":
-        this.handleReadFile(req, res, parsedURL);
-        break;
       default:
         res.end("404 Not Found");
         break;
@@ -62,22 +56,6 @@ class ServerApp {
           <button type="submit">${this.language.nameAction}</button>
         </fieldset>
       </form>
-      <form action="/writeFile" method="GET">
-        <fieldset>
-          <legend>${this.language.writeLabel}</legend>
-          <input type="text" name="message" id="message" placeholder="${this.language.writeMessage}" />
-          <label for="message">${this.language.writeLabel}</label>
-          <button type="submit">${this.language.writeAction}</button>
-        </fieldset>
-      </form>
-      <form action="/readFile" method="GET">
-        <fieldset>
-          <legend>${this.language.readLabel}</legend>
-          <input type="text" name="file" id="file" placeholder="${this.language.readMessage}" />
-          <label for="file">${this.language.readLabel}</label>
-          <button type="submit">${this.language.readAction}</button>
-        </fieldset>
-      </form>
     `);
   }
 
@@ -86,28 +64,6 @@ class ServerApp {
     const name = parsedURL.query["name"];
     const message = formatString(this.language.greet, name);
     res.end(`<span style="color: blue;">${message} ${date}</span>`);
-  }
-
-  // Handles the /writeFile endpoint by appending content to a file
-  handleWriteFile(req, res, parsedURL) {
-    const content = parsedURL.query["message"];
-    fs.appendFile("file.txt", content, (err) => {
-      if (err) {
-        return res.end("Uh oh error, not poggers");
-      }
-      return res.end("File update updated, POGGERS!");
-    });
-  }
-
-  // Handles the /readFile endpoint by reading a file's contents
-  handleReadFile(req, res, parsedURL) {
-    const file = parsedURL.query["file"];
-    fs.readFile(file, (err, data) => {
-      if (err) {
-        return res.end(file + " 404 Not Found!");
-      }
-      return res.end(data);
-    });
   }
 }
 
